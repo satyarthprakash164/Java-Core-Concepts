@@ -1,0 +1,69 @@
+import java.util.Scanner;
+class TwoDArray{
+    int[][]arr;
+    int m,n;
+    TwoDArray(int rows,int cols){
+        m=rows;
+        n=cols;
+        arr=new int[m][n];
+    }
+    void input(){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter"+(m*n)+"elements:");
+        for(int i=0;i<m;i++)
+            for(int j=0;j<n;j++)
+               arr[i][j]=sc.nextInt();
+    }
+    void display(){
+        System.out.println("2D Array("+m+"x"+n+"):");
+        for(int i=0;i<m;i++){
+           for(int j=0;j<n;j++){
+               System.out.print(arr[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+    void distributeAll(OneDArray[]allElements){
+        int idx=0;
+        for (int i=0;i<m;i++){
+           for (int j=0;j<n;j++){
+              allElements[idx].arr[0]=arr[i][j];
+                idx++;
+            }
+        }
+    }
+}
+class OneDArray{
+    int[] arr;
+    int n;
+    OneDArray(int size){
+        n=size;
+        arr=new int[n];
+    }
+    void display(){
+        System.out.print(arr[0]+" ");
+    }
+}
+class Assignment11Q3{
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Enter rows(m): ");
+        int m=sc.nextInt();
+        System.out.print("Enter columns(n):");
+        int n=sc.nextInt();
+        TwoDArray td=new TwoDArray(m,n);
+        td.input();
+        td.display();
+        int totalObjects=m*n;
+        OneDArray[] allElements=new OneDArray[totalObjects];
+        for (int i=0;i<totalObjects;i++){
+            allElements[i]=new OneDArray(1);
+        }
+        td.distributeAll(allElements);
+        System.out.println("---Q3:All"+totalObjects+"elements distributed---");
+        for (int i=0;i<totalObjects;i++){
+            allElements[i].display();
+        }
+        System.out.println();
+    }
+}
